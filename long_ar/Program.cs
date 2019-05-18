@@ -18,6 +18,11 @@ namespace long_ar
             Console.WriteLine("b+d = {0}",b+d);
             Console.WriteLine("a+b = {0}",a+b);
             Console.WriteLine("c+d = {0}",c+d);
+            Console.WriteLine("a-c = {0}",a-c);
+            Console.WriteLine("b-d = {0}",b-d);
+            Console.WriteLine("a-b = {0}",a-b);
+            Console.WriteLine("c-d = {0}",c-d);
+            
         }
     }
 }

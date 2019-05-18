@@ -53,6 +53,22 @@ namespace long_ar
         {
             return new Number(Add(num1,num2));
         }
+        public static Number operator-(Number num1, Number num2)
+        {
+            return new Number(subtraction(num1,num2));
+        }
+        public static Number operator*(Number num1, Number num2)
+        {
+            return new Number(multiplication(num1,num2));
+        }
+        public static Number operator/(Number num1, Number num2)
+        {
+            return new Number(split(num1,num2));
+        }
+        public static Number operator%(Number num1, Number num2)
+        {
+            return new Number(residueSplit(num1,num2));
+        }
 
         private static string Add(Number num1, Number num2)
         {
@@ -178,6 +194,34 @@ namespace long_ar
 
                 return finish;
             }
+        }
+
+        private static string subtraction(Number num1, Number num2)
+        {
+            if (num2.negative)
+            {
+                num2.negative = false;
+            }
+            else
+            {
+                num2.negative = true;
+            }
+            return Add(num1, num2);
+        }
+
+        private static string multiplication(Number num1, Number num2)
+        {
+            return null;
+        }
+
+        private static string split(Number num1, Number num2)
+        {
+            return null;
+        }
+
+        private static string residueSplit(Number num1, Number num2)
+        {
+            return null;
         }
     }
 }

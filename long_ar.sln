@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "long_ar", "long_ar\long_ar.csproj", "{CF37EF48-8489-4B9E-B82D-E969A6E6248A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CF37EF48-8489-4B9E-B82D-E969A6E6248A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF37EF48-8489-4B9E-B82D-E969A6E6248A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF37EF48-8489-4B9E-B82D-E969A6E6248A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF37EF48-8489-4B9E-B82D-E969A6E6248A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

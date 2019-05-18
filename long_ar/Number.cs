@@ -62,17 +62,20 @@ namespace long_ar
             int buf;
             string rezalt = "";
             Number bigger;
+            Number lower;
             if (num1.rang >= num2.rang)
             {
                 rang = num2.rang;
                 highrang = num1.rang;
                 bigger = num1;
+                lower = num2;
             }
             else
             {
                 rang = num1.rang;
                 highrang = num2.rang;
                 bigger = num2;
+                lower = num1;
             }
             if (num1.negative == num2.negative)
             {
@@ -123,10 +126,58 @@ namespace long_ar
             }
             else
             {
-                
+                for (int i = 0; i < rang; ++i)
+                {
+                    buf = bigger.digits[i] - lower.digits[i];
+                    if (drift)
+                    {
+                        buf--;
+                        drift = false;
+                    }
+                    if (buf < 0)
+                    {
+                        buf += 10;
+                        drift = true;
+                    }
+
+                    rezalt += buf;
+                }
+
+                for (int i = rang; i < highrang; ++i)
+                {
+                    buf = bigger.digits[i];
+                    if (drift)
+                    {
+                        buf--;
+                        drift = false;
+                    }
+                    if (buf < 0)
+                    {
+                        buf += 10;
+                        drift = true;
+                    }
+
+                    rezalt += buf;
+                }
+
+                while ((rezalt[rezalt.Length - 1]) == '0')
+                {
+                    rezalt = rezalt.Remove(rezalt.Length - 1);
+                }
+                    
+                if (bigger.negative)
+                {
+                    rezalt += '-';
+                }
+
+                string finish = "";
+                for (int i = rezalt.Length - 1; i >= 0; --i)
+                {
+                    finish += rezalt[i];
+                }
+
+                return finish;
             }
-            
-            return null;
         }
     }
 }

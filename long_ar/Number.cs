@@ -331,6 +331,10 @@ namespace long_ar
                 rezalt += buf;
                 buf = 0;
             }
+            while ((rezalt[rezalt.Length - 1]) == '0' && rezalt.Length > 1)
+            {
+                rezalt = rezalt.Remove(rezalt.Length - 1);
+            }
             if (bigger.negative != lower.negative)
             {
                 finish = "-";
@@ -344,7 +348,59 @@ namespace long_ar
 
         private static string split(Number num1, Number num2)
         {
-            return null;
+            Number _num1 = new Number(StringConvert(num1));
+            Number _num2 = new Number(StringConvert(num2));
+            Number bigger = _num1;
+            Number lower = _num2;
+            int rang;
+            int highrang;
+            if (num1.rang > num2.rang)
+            {
+                rang = _num2.rang;
+                highrang = _num1.rang;
+                bigger = _num1;
+                lower = _num2;
+            }
+            else if (num1.rang < num2.rang)
+            {
+                return "0";
+            }
+            else
+            {
+                int i = 0;
+                rang = _num1.rang;
+                highrang = rang;
+                do
+                {
+                    if (_num1.digits[i] > _num2.digits[i])
+                    {
+                        bigger = _num1;
+                        lower = _num2;
+                    }
+                    else if (_num1.digits[i] < _num2.digits[i])
+                    {
+                        return "0";
+                    }
+                    ++i;
+                }
+                while (_num1.digits[i] == _num2.digits[i] && i + 1 < _num1.digits.Count);
+                if (i == _num1.digits.Count)
+                {
+                    return "1";
+                }
+            }
+            bigger.negative = false;
+            lower.negative = false;
+            int k = -1;
+            while (bigger.negative != true)
+            {
+                bigger -= lower;
+                ++k;
+                //Console.WriteLine(k);
+            }
+            string finish = "";
+            finish += k;
+            return finish;
         }
 
         private static string residueSplit(Number num1, Number num2)

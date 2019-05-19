@@ -77,27 +77,29 @@ namespace long_ar
             bool drift = false;
             int buf;
             string rezalt = "";
+            Number _num1 = new Number(StringConvert(num1));
+            Number _num2 = new Number(StringConvert(num2));
             Number bigger;
             Number lower;
             if (num1.rang >= num2.rang)
             {
-                rang = num2.rang;
-                highrang = num1.rang;
-                bigger = num1;
-                lower = num2;
+                rang = _num2.rang;
+                highrang = _num1.rang;
+                bigger = _num1;
+                lower = _num2;
             }
             else
             {
-                rang = num1.rang;
-                highrang = num2.rang;
-                bigger = num2;
-                lower = num1;
+                rang = _num1.rang;
+                highrang = _num2.rang;
+                bigger = _num2;
+                lower = _num1;
             }
-            if (num1.negative == num2.negative)
+            if (_num1.negative == _num2.negative)
             {
                 for (int i = 0; i < rang; ++i)
                 {
-                    buf = num1.digits[i] + num2.digits[i];
+                    buf = _num1.digits[i] + _num2.digits[i];
                     if (drift)
                     {
                         buf++;
@@ -127,7 +129,7 @@ namespace long_ar
                     rezalt += buf;
                 }
     
-                if (num1.negative)
+                if (_num1.negative)
                 {
                     rezalt += '-';
                 }
@@ -176,7 +178,7 @@ namespace long_ar
                     rezalt += buf;
                 }
 
-                while ((rezalt[rezalt.Length - 1]) == '0')
+                while ((rezalt[rezalt.Length - 1]) == '0' && rezalt.Length > 1)
                 {
                     rezalt = rezalt.Remove(rezalt.Length - 1);
                 }
@@ -198,15 +200,17 @@ namespace long_ar
 
         private static string subtraction(Number num1, Number num2)
         {
+            Number _num1 = new Number(StringConvert(num1));
+            Number _num2 = new Number(StringConvert(num2));
             if (num2.negative)
             {
-                num2.negative = false;
+                _num2.negative = false;
             }
             else
             {
-                num2.negative = true;
+                _num2.negative = true;
             }
-            return Add(num1, num2);
+            return Add(_num1, _num2);
         }
 
         private static string multiplication(Number num1, Number num2)
@@ -222,6 +226,19 @@ namespace long_ar
         private static string residueSplit(Number num1, Number num2)
         {
             return null;
+        }
+        private static string StringConvert (Number num)
+        {
+            var finish = "";
+            if (num.negative)
+            {
+                finish += '-';
+            }
+            for (int i = num.digits.Count - 1; i >= 0; --i)
+            {
+                finish += num.digits[i];
+            }
+            return finish;
         }
     }
 }

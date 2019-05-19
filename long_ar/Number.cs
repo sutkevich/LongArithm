@@ -242,7 +242,104 @@ namespace long_ar
 
         private static string multiplication(Number num1, Number num2)
         {
-            return null;
+            Number _num1 = new Number(StringConvert(num1));
+            Number _num2 = new Number(StringConvert(num2));
+            Number bigger = _num1;
+            Number lower = _num2;
+            bool drift = false;
+            int core = 0;
+            int buf;
+            if (num1.rang > num2.rang)
+            {
+                bigger = _num1;
+                lower = _num2;
+            }
+            else if (num1.rang < num2.rang)
+            {
+                bigger = _num2;
+                lower = _num1;
+            }
+            else
+            {
+                int i = 0;
+                do
+                {
+                    if (_num1.digits[i] > _num2.digits[i])
+                    {
+                        bigger = _num1;
+                        lower = _num2;
+                    }
+                    else if (_num1.digits[i] < _num2.digits[i])
+                    {
+                        bigger = _num2;
+                        lower = _num1;
+                    }
+                    ++i;
+                }
+                while (_num1.digits[i] == _num2.digits[i] && i + 1 < _num1.digits.Count);
+                if (i == _num1.digits.Count)
+                {
+                    bigger = _num1;
+                    lower = _num2;
+                }
+            }
+            int[,] matrix = new int[lower.digits.Count, bigger.digits.Count + lower.digits.Count];
+            for (int i = 0; i < lower.digits.Count; ++i)
+            {
+                for(int j = 0; j < bigger.digits.Count; ++j)
+                {
+                    buf = bigger.digits[j] * lower.digits[i];
+                    if (drift)
+                    {
+                        buf += core;
+                        drift = false;
+                        core = 0;
+                    }
+                    if (buf / 10 > 0)
+                    {
+                        drift = true;
+                        core = buf / 10;
+                    }
+                    buf %= 10;
+                    matrix[i, j + i] = buf;
+                }
+            }
+            matrix[lower.digits.Count - 1, bigger.digits.Count + lower.digits.Count - 1] = core;
+            core = 0;
+            buf = 0;
+            drift = false;
+            string rezalt = "";
+            string finish = "";
+            for (int i = 0; i < bigger.digits.Count + lower.digits.Count; ++i)
+            {
+                for (int j = 0; j < lower.digits.Count; ++j)
+                {
+                    buf += matrix[j, i];    //поменял
+                }
+                if (drift)
+                {
+                    buf += core;
+                    drift = false;
+                    core = 0;
+                }
+                if (buf / 10 > 0)
+                {
+                    drift = true;
+                    core = buf / 10;
+                }
+                buf %= 10;
+                rezalt += buf;
+                buf = 0;
+            }
+            if (bigger.negative != lower.negative)
+            {
+                finish = "-";
+            }
+            for (int i = rezalt.Length - 1; i >= 0; --i)
+            {
+                finish += rezalt[i];
+            }
+            return finish;
         }
 
         private static string split(Number num1, Number num2)

@@ -79,21 +79,48 @@ namespace long_ar
             string rezalt = "";
             Number _num1 = new Number(StringConvert(num1));
             Number _num2 = new Number(StringConvert(num2));
-            Number bigger;
-            Number lower;
-            if (num1.rang >= num2.rang)
+            Number bigger = _num1;
+            Number lower = _num2;
+            if (num1.rang > num2.rang)
             {
                 rang = _num2.rang;
                 highrang = _num1.rang;
                 bigger = _num1;
                 lower = _num2;
             }
-            else
+            else if (num1.rang < num2.rang)
             {
                 rang = _num1.rang;
                 highrang = _num2.rang;
                 bigger = _num2;
                 lower = _num1;
+            }
+            else
+            {
+                int i = 0;
+                rang = _num1.rang;
+                highrang = rang;
+                do
+                {
+                    if (_num1.digits[i] > _num2.digits[i])
+                    {
+                        bigger = _num1;
+                        lower = _num2;
+                    }
+                    else if (_num1.digits[i] < _num2.digits[i])
+                    {
+                        bigger = _num2;
+                        lower = _num1;
+                    }
+                    ++i;
+                }
+                while (_num1.digits[i] == _num2.digits[i] && i + 1 < _num1.digits.Count);
+                if (i == _num1.digits.Count)
+                {
+                    bigger = _num1;
+                    lower = _num2;
+                }
+
             }
             if (_num1.negative == _num2.negative)
             {

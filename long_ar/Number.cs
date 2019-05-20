@@ -391,16 +391,33 @@ namespace long_ar
             }
             bigger.negative = false;
             lower.negative = false;
-            int k = -1;
-            while (bigger.negative != true)
+            string sub = "";
+            int key = 0;
+            for (key = 0; key < lower.rang; ++key)
             {
-                bigger -= lower;
+                sub += bigger.digits[highrang - key - 1];
+            }
+            sub += bigger.digits[highrang - key - 2];
+            Number nBuf = sub;
+            int k = -1;
+            while (nBuf.negative != true)
+            {
+                nBuf -= lower;
                 ++k;
                 //Console.WriteLine(k);
             }
             string finish = "";
-            finish += k;
-            return finish;
+            if (k / 10 > 0)
+            {
+                finish += (k / 10);
+            }
+            else
+            {
+                finish += k;
+            }
+            
+            
+            return null;
         }
 
         private static string residueSplit(Number num1, Number num2)
